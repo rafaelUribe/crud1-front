@@ -1,0 +1,16 @@
+<label for="select-input">{{labl}}</label>
+<select
+    id="select-input"
+    [(ngModel)]="brandID"
+    (change)="onChange()"
+    class="form-select"
+    aria-label="Selec a brand"
+    aria-placeholder="select a brand"
+>
+    <option 
+        *ngFor="let brand of brands"
+        [value]="brand.id"
+    >
+        {{brand.name}}
+    </option>
+</select>

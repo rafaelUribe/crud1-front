@@ -1,0 +1,14 @@
+<ul
+    class="list-group"
+>
+    <li
+        *ngFor="let car of cars"
+        class="list-group-item 
+                text-center
+                cursor-pointer    
+            "
+        (click)="selection(car)"
+    >
+        {{car.brand.name}} {{car.name}}
+    </li>
+</ul>

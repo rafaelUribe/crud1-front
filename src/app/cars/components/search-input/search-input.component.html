@@ -1,12 +1,17 @@
 <form
-    (ngSubmit)="search()"
+    (ngSubmit)="BarInput()"
     autocomplete="off"    
 >
-    <input 
+    <label for="input-bar">
+        {{labl}}
+    </label>
+    <input
+        id="input-bar" 
         type="text"
         name="term"
-        class="form-control"
+        class="form-control w-100"
         [placeholder]="placeholder"
+        (input)="BarInput()"
         [(ngModel)]="term"
     >
 </form>

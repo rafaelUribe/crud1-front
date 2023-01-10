@@ -6,11 +6,67 @@
     </h3>
     <div class="row">
         <app-search-input
-            class="col col-md-4"
-            placeholder="Search car..."
-            (onSubmt)="searchCar( $event )"
+            class="col-12 col-sm-12 col-md-6 col-lg-4"
+            labl="Car name"
+            placeholder="Search by car name..."
+            (onInput)="searchInputCall($event)"
         >
         </app-search-input>
     </div>
-    
+    <div
+        *ngIf="editionMode || _displayCars.length === 0" 
+        class="row"
+    >
+        <app-brand-selector
+            class="mt-3 col-12 col-sm-12 col-md-6 col-lg-4"
+            [brands]="_brands"
+            (onSelection)="setBrand( $event )"
+            labl="Select car brand"
+        >
+        </app-brand-selector>
+    </div>
+    <div
+        *ngIf="_brand"
+        class="row mt-3"
+    >
+        <div class="col">
+            Editing: {{this._brand.name}} {{this._term}}
+        </div>
+    </div>
+    <div
+        *ngIf="_displayCars.length === 0" 
+        class="row">
+        <app-save-buttons
+            saveLabel="Add Car"
+            (onCancel)="cancel()"
+            (onSave)="addNewCar()"
+        >
+
+        </app-save-buttons>
+    </div>
+    <div
+    *ngIf="editionMode" 
+    class="row">
+    <app-edit-buttons
+        saveLabel="Add Car"
+        (onCancel)="cancel()"
+        (onSave)="addNewCar()"
+        (onDelete)="deleteCar()"
+    >
+
+    </app-edit-buttons>
+</div>
+    <div class="row">
+        <app-cars-table
+            class="
+                mt-3 
+                col-12 
+                col-sm-12 
+                col-md-6
+                col-lg-4   
+            "
+            [cars]="_displayCars"
+            (onSelection)="setEdition($event)"
+            ></app-cars-table>
+    </div>
 </div>

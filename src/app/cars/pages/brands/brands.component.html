@@ -5,12 +5,97 @@
         Brands
     </h3>
     <div class="row">
-        <app-search-input
-            class="col col-md-4"
-            placeholder="Search brand..."
-            (onSubmt)="searchBrand( $event )"
+
+        <div
+            class="col-12 col-sm-12 col-md-6 col-lg-4"
         >
-        </app-search-input>
+            <app-search-input
+                *ngIf="!editionMode"
+                class="col-12 col-sm-12 col-md-6 col-lg-4"
+                placeholder="Search by brand name..."
+                labl="Brand name"
+                (onInput)="filterBrands( $event )"
+                (term)="term"
+            >
+            </app-search-input>
+        </div>
+    </div>
+
+    <app-save-buttons
+        *ngIf="displayBrands.length === 0"
+        saveLabel="Add Brand"
+        (onCancel)="resetInput()"
+        (onSave)="saveB()"
+    >
+
+    </app-save-buttons>
+
+    <div 
+        *ngIf="editionMode" 
+        class="row"
+    >
+        <div
+            class=""
+        >
+            <h3>Edit Brand</h3>
+            <div class="container-sm">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <label for="brand-edition-input">
+                            Brand name
+                        </label>
+                        <input
+                            id="brand-edition-input"
+                            type="text"
+                            style="max-width: 305px;"
+                            class="form-control w-100"
+                            [(ngModel)]="editionBrand.name"
+                        >
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <app-edit-buttons
+        *ngIf="editionMode"
+        (onSave)="updateB()"
+        (onCancel)="cancelEdition()"
+        (onDelete)="deleteB()"
+    >
+
+    </app-edit-buttons>
+        
+    <div class="row mt-4">
+        <div class="col-12">
+            <ul
+                class="list-group
+                col-12 col-sm-12 col-md-6 col-lg-4
+                "
+            >
+                <li
+                    *ngFor="let brand of displayBrands"
+                    class="list-group-item text-center cursor-pointer hover-blue"
+                    (click)="setEditionBrand(brand)"
+                >
+                    {{brand.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div
+        *ngIf="brands.length === 0"
+        class="col-3
+            spinner-border 
+            text-info
+        "
+        >
+        </div>
+
     </div>
     
 </div>

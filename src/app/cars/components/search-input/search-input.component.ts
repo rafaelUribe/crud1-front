@@ -7,19 +7,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SearchInputComponent {
   @Input('placeholder') placeholder: string = "";
-  @Output() onSubmt: EventEmitter<string> = new EventEmitter();
-
-  term: string = '';
-
-  search(){
-    if(this.term.trim().length === 0){
-      this.term = ''
-      return
-    }
-
-    this.onSubmt.emit(this.term);
-
-    this.term = "";
+  @Input('labl') labl: string = "";
+  @Output() onInput: EventEmitter<string> = new EventEmitter();
+  
+  term: string = "";
+  
+  BarInput(){
+    this.onInput.emit(this.term);
   }
 
 }
